@@ -1,3 +1,6 @@
+#  main.py
+#  Created by Kiro Shin <mulgom@gmail.com> on 2024.
+
 def print_hi(name):
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
