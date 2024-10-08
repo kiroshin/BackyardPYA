@@ -18,29 +18,27 @@ class MockWindow(QMainWindow):
         self.addToolBar(toolbar)
 
         alpha = QAction("alpha", self)
-        alpha.setShortcut("Ctrl+1")
         toolbar.addAction(alpha)
         self.alpha_action = alpha
         # self.alpha_action.triggered.connect(...)
 
         beta = QAction("beta", self)
-        beta.setShortcut("Ctrl+2")
         toolbar.addAction(beta)
         self.beta_action = beta
 
         gamma = QAction("gamma", self)
-        gamma.setShortcut("Ctrl+3")
         toolbar.addAction(gamma)
         self.gamma_action = gamma
 
         delta = QAction("delta", self)
-        delta.setShortcut("Ctrl+4")
         delta.setCheckable(True)
         toolbar.addAction(delta)
         self.delta_action = delta
 
         widget = QWidget(self)
         layout = QVBoxLayout()
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
