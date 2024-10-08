@@ -1,5 +1,10 @@
 #  item_tag_title_delegate.py
 #  Created by Kiro Shin <mulgom@gmail.com> on 2024.
+#
+#  ┌──────────────────┐
+#  │TAG    TITLE      │
+#  └──────────────────┘
+#
 
 from PySide6.QtCore import Qt, QSize, QRect, QModelIndex, QPoint
 from PySide6.QtGui import QColor, QPalette, QPainter
@@ -30,9 +35,9 @@ class ItemTagTitleDelegate(QStyledItemDelegate):
         item_tag = index.data(ItemDataUserRole.Tag)
         item_title = index.data(Qt.ItemDataRole.DisplayRole)
         # 폰트
-        font = index.data(Qt.ItemDataRole.FontRole)
-        if not font:
+        if not (font := index.data(Qt.ItemDataRole.FontRole)):
             font = option.font
+        # font = font if font else option.font
         # 글자공간
         title_rect = QRect(option.rect)
         title_rect.setTopLeft(title_rect.topLeft() + QPoint(_PADDING, 0))
@@ -90,13 +95,13 @@ def _draw_text(painter, option, state, rect, font, text):
 
 
 if __name__ == '__main__':
+    from PySide6.QtGui import QFont
     from PySide6.QtWidgets import QApplication
     from mock import *
     from plain_list_view import PlainListView
     from plain_list_model import PlainListModel, PlainListItem
 
     class _CustomListModel(PlainListModel):
-        # OVERRIDE
         def data(self, index, role=...):
             if role == ItemDataUserRole.Tag:
                 return "TAG"
@@ -106,6 +111,9 @@ if __name__ == '__main__':
     window = MockWindow()
     datasource = _CustomListModel()
     datasource.size_hint = QSize(100, 40)
+    font = QFont()
+    font.setPixelSize(14)
+    datasource.font = font
     datasource.reset_sheet([
         PlainListItem(text="Hello"),
         PlainListItem(text="World"),
