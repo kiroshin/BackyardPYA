@@ -1,14 +1,14 @@
-#  http_aio_randomuser_access.py
+#  aiohttp_randomuser_access.py
 #  Created by Kiro Shin <mulgom@gmail.com> on 2024.
 
 from typing import NamedTuple
 import aiohttp
-from http_aio_client import HttpAioClient
+from aiohttp_client import AioHttpClient
 
 _BASE_URL = "https://randomuser.me/api/"
 
 
-class HttpAioRandomuserAccess(HttpAioClient):
+class AiohttpRandomuserAccess(AioHttpClient):
     async def get_all_user(self, count=100) -> list['WEB.User'] | None:
         async with self.SESSION.get(_BASE_URL, params={"results": count}) as resp:
             if 200 <= resp.status < 300:
